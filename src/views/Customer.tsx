@@ -1,31 +1,39 @@
-function Customer(){
-    return(
+import Input from "../components/input/Input.tsx";
+
+function Customer() {
+    return (
         <div className="container pt-3">
-            <form action="" >
+            <form action="">
                 <div className="row">
                     <div className="col-12 col-sm-6 col-md-3">
-                        <div className="form-group">
-                            <label htmlFor="customername">Customer Name</label>
-                            <input type="text" className="form-control" id='customerName'/>
-                        </div>
+                        <Input
+                            label={"Customer Nic"}
+                            name={"customerNic"}
+                            placeholder={" Enter Customer Nic..."}
+                            types={"text"}/>
                     </div>
                     <div className="col-12 col-sm-6 col-md-3">
-                        <div className="form-group">
-                            <label htmlFor="customername">Customer Name</label>
-                            <input type="text" className="form-control" id='customerName'/>
-                        </div>
+
+                            <Input
+                                label={"Customer Name"}
+                                name={"customerName"}
+                                placeholder={" Enter Customer Name"}
+                                types={"text"}/>
+
                     </div>
                     <div className="col-12 col-sm-6 col-md-3">
-                        <div className="form-group">
-                            <label htmlFor="customerAddress">Customer Address</label>
-                            <input type="text" className="form-control" id='customerAddes'/>
-                        </div>
+                        <Input
+                            label={"Customer Address"}
+                            name={"customerAddress"}
+                            placeholder={" Enter Customer Address"}
+                            types={"text"}/>
                     </div>
                     <div className="col-12 col-sm-6 col-md-3">
-                        <div className="form-group">
-                            <label htmlFor="customerSalary">Customer Salary</label>
-                            <input type="text" className="form-control" id='customerSalary'/>
-                        </div>
+                        <Input
+                            label={"Customer Salary"}
+                            name={"customerSalary"}
+                            placeholder={" Enter Customer Salary"}
+                            types={"number"}/>
                     </div>
                 </div>
 
@@ -38,16 +46,15 @@ function Customer(){
                 <div className="row mt-3">
                     <div className="col-12">
                         <form className="col-12">
-
                             <input type="search" className='form-control' placeholder='Search Customer'/>
                         </form>
                     </div>
                 </div>
             </form>
-           <div className="row mt-3">
-               <div className="col-12">
-                   <table className="table table-hover table-bordered">
-                       <thead>
+            <div className="row mt-3">
+                <div className="col-12">
+                    <table className="table table-hover table-bordered">
+                        <thead>
                         <tr>
                             <th>#Id</th>
                             <th>Nic</th>
@@ -57,26 +64,26 @@ function Customer(){
                             <th>Delete</th>
                             <th>Update</th>
                         </tr>
-                       </thead>
+                        </thead>
 
-                       <tbody>
-                       <tr>
-                           <td>#1001</td>
-                           <td>9524798258v</td>
-                           <td>nimal</td>
-                           <td>colombo</td>
-                           <td>5000.00</td>
-                           <td>
-                               <button className="btn btn-outline-danger btn-sm "> Delete</button>
-                           </td>
-                           <td>
-                               <button className="btn btn-outline-success btn-sm "> Update</button>
-                           </td>
-                       </tr>
-                       </tbody>
-                   </table>
-               </div>
-           </div>
+                        <tbody>
+                        <tr>
+                            <td>#1001</td>
+                            <td>9524798258v</td>
+                            <td>nimal</td>
+                            <td>colombo</td>
+                            <td>5000.00</td>
+                            <td>
+                                <button className="btn btn-outline-danger btn-sm "> Delete</button>
+                            </td>
+                            <td>
+                                <button className="btn btn-outline-success btn-sm "> Update</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     )
 }
