@@ -6,6 +6,7 @@ interface data{
     name:string,
     placeholder:string,
     types:HTMLInputTypeAttribute | undefined,
+
 }
 
 function Input(prpos:data){
