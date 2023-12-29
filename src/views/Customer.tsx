@@ -1,16 +1,36 @@
 import Input from "../components/input/Input.tsx";
+import {useState} from "react";
+
+interface Customer {
+    _id:string,
+    nic:string,
+    name:string,
+    address:string,
+    salary:number
+}
 
 function Customer() {
+
+    const [nic, setNic] = useState('')
+    const [name, setName] = useState('')
+    const [address, setAddress] = useState('')
+    const [salary, setSalary] = useState<number | "">('')
+
+
+    const saveCustomer=()=>{
+        console.log(nic,name,address,salary)
+    }
+
     return (
         <div className="container pt-3">
-            <form action="">
                 <div className="row">
                     <div className="col-12 col-sm-6 col-md-3 mb-3">
                         <Input
                             label={"Customer Nic"}
                             name={"customerNic"}
                             placeholder={""}
-                            types={"text"}/>
+                            types={"text"}
+                        callBack={setNic}/>
                     </div>
                     <div className="col-12 col-sm-6 col-md-3 mb-3">
 
@@ -18,7 +38,8 @@ function Customer() {
                                 label={"Customer Name"}
                                 name={"customerName"}
                                 placeholder={" "}
-                                types={"text"}/>
+                                types={"text"}
+                                callBack={setName}/>
 
                     </div>
                     <div className="col-12 col-sm-6 col-md-3 mb-3">
@@ -26,20 +47,23 @@ function Customer() {
                             label={"Customer Address"}
                             name={"customerAddress"}
                             placeholder={""}
-                            types={"text"}/>
+                            types={"text"}
+                            callBack={setAddress}/>
                     </div>
                     <div className="col-12 col-sm-6 col-md-3 mb-3">
                         <Input
                             label={"Customer Salary"}
                             name={"customerSalary"}
                             placeholder={""}
-                            types={"number"}/>
+                            types={"number"}
+                            callBack={setSalary}
+                        />
                     </div>
                 </div>
 
                 <div className="row mt-3 ">
                     <div className="col-12 mb-3">
-                        <button className='btn btn-primary col-12' type="button">Save Customer</button>
+                        <button className='btn btn-primary col-12' type="button" onClick={saveCustomer}>Save Customer</button>
                     </div>
                 </div>
                 <hr/>
@@ -50,7 +74,7 @@ function Customer() {
                         </form>
                     </div>
                 </div>
-            </form>
+
             <div className="row mt-3">
                 <div className="col-12">
                     <table className="table table-hover table-bordered">
@@ -84,6 +108,8 @@ function Customer() {
                     </table>
                 </div>
             </div>
+
+
         </div>
     )
 }

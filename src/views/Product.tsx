@@ -1,10 +1,13 @@
+/*
 import Input from "../components/input/Input.tsx";
 import Textarea from "../components/textatea/textarea.tsx";
+*/
 
 
 function Product(){
     return(
-        <div className="container pt-3">
+        <h1>product</h1>
+   /*     <div className="container pt-3">
             <form action="">
                 <div className="row">
                     <div className="col-12 col-sm-6 col-md-3 mb-3">
@@ -12,7 +15,8 @@ function Product(){
                             label={"Product Name"}
                             name={"productName"}
                             placeholder={""}
-                            types={"text"}/>
+                            types={"text"}
+                            />
                     </div>
                     <div className="col-12 col-sm-6 col-md-3  mb-3">
 
@@ -92,7 +96,7 @@ function Product(){
                     </table>
                 </div>
             </div>
-        </div>
+        </div>*/
     )
 }
 

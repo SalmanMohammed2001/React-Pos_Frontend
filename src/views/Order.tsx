@@ -1,20 +1,23 @@
+/*
 import Input from "../components/input/Input.tsx";
 import React from "react";
+*/
 
 function Order(){
 
-    const bottomContext:React.CSSProperties={
+ /*   const bottomContext:React.CSSProperties={
         width:'100%',
         display:'flex',
         alignContent:'center',
         justifyContent:'space-between'
-    }
+    }*/
 
-    const totalText:React.CSSProperties={
+ /*   const totalText:React.CSSProperties={
         color:'red'
-    }
+    }*/
     return(
-        <div className="container pt-3">
+        <h1>order</h1>
+    /*    <div className="container pt-3">
             <div className="row ">
                 <div className="col-12 col-sm-6 col-md-3 mb-3">
                     <div className="form-group">
@@ -144,7 +147,7 @@ function Order(){
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*/
     )
 }
 
