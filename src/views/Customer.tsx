@@ -1,5 +1,5 @@
 import Input from "../components/input/Input.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 
@@ -17,16 +17,25 @@ function Customer() {
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
     const [salary, setSalary] = useState<number | "">('')
-
-
     const saveCustomer= async ()=>{
         console.log(nic,name,address,salary)
      const response= await  axios.post('http://localhost:3000/api/v1/customers/create',{
             nic,name,address,salary
         })
+        findAllCustomer()
         console.log(response)
     }
 
+    useEffect(()=>{
+        findAllCustomer()
+    },[])
+
+    const[customers,setCustomers]=useState<Customer[]>([])
+    const findAllCustomer=async ()=>{
+        const response=await axios.get('http://localhost:3000/api/v1/customers/find-all?searchText=&page=1&size=10')
+        setCustomers(response.data)
+    }
+    console.log(customers)
     return (
         <div className="container pt-3">
                 <div className="row">
@@ -97,19 +106,22 @@ function Customer() {
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>#1001</td>
-                            <td>9524798258v</td>
-                            <td>nimal</td>
-                            <td>colombo</td>
-                            <td>5000.00</td>
-                            <td>
-                                <button className="btn btn-outline-danger btn-sm "> Delete</button>
-                            </td>
-                            <td>
-                                <button className="btn btn-outline-success btn-sm "> Update</button>
-                            </td>
-                        </tr>
+                        {customers.map((customer,index)=>{
+                            return <tr key={index}>
+                                <td>{index+1}</td>
+                                <td>{customer.nic}</td>
+                                <td>{customer.name}</td>
+                                <td>{customer.address}</td>
+                                <td>{customer.salary}</td>
+                                <td>
+                                    <button className="btn btn-outline-danger btn-sm "> Delete</button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-outline-success btn-sm "> Update</button>
+                                </td>
+                            </tr>
+                        })}
+
                         </tbody>
                     </table>
                 </div>
