@@ -1,5 +1,5 @@
 import Input from "../components/input/Input.tsx";
-import {useEffect, useState} from "react";
+import {HTMLInputTypeAttribute, useEffect, useState} from "react";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import UpdateInput from "../components/input/updateInput.tsx";
@@ -49,7 +49,7 @@ function Customer() {
     const [updateNic, setUpdateNic] = useState('')
     const [updateName, setUpdateName] = useState('')
     const [updateAddress, setUpdateAddress] = useState('')
-    const [updateSalary,setUpdateSalary] = useState<number | ''>('')
+    const [updateSalary,setUpdateSalary] = useState< HTMLInputTypeAttribute| ''>('')
 
     const[modeState,setModelState]=useState<boolean>(false)
     const lunchModel=async (id:string)=>{
@@ -58,7 +58,7 @@ function Customer() {
         setUpdateNic(response.data.nic)
         setUpdateName(response.data.name)
         setUpdateAddress(response.data.address)
-        setUpdateSalary(parseFloat(response.data.salary))
+        setUpdateSalary(response.data.salary)
         setModelState(true)
     }
 
