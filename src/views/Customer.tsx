@@ -1,6 +1,8 @@
 import Input from "../components/input/Input.tsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {Modal} from "react-bootstrap";
+import UpdateInput from "../components/input/updateInput.tsx";
 
 
 interface Customer {
@@ -42,6 +44,35 @@ function Customer() {
         findAllCustomer()
     }
 
+
+    const [selectedCustomerId, setSelectedCustomerId] = useState('')
+    const [updateNic, setUpdateNic] = useState('')
+    const [updateName, setUpdateName] = useState('')
+    const [updateAddress, setUpdateAddress] = useState('')
+    const [updateSalary,setUpdateSalary] = useState<number | ''>('')
+
+    const[modeState,setModelState]=useState<boolean>(false)
+    const lunchModel=async (id:string)=>{
+        const response= await axios.get('http://localhost:3000/api/v1/customers/find-by-id/'+id)
+        setSelectedCustomerId(response.data._id)
+        setUpdateNic(response.data.nic)
+        setUpdateName(response.data.name)
+        setUpdateAddress(response.data.address)
+        setUpdateSalary(parseFloat(response.data.salary))
+        setModelState(true)
+    }
+
+
+
+    const updateCustomer= async ()=>{
+        console.log(selectedCustomerId,updateNic,updateSalary,updateName,updateAddress)
+        const response=await axios.put('http://localhost:3000/api/v1/customers/update/'+selectedCustomerId,{
+            nic:updateNic, address:updateAddress, name:updateName, salary:updateSalary
+        })
+        findAllCustomer()
+        console.log(response)
+        setModelState(false)
+    }
 
     return (
         <div className="container pt-3">
@@ -121,14 +152,17 @@ function Customer() {
                                 <td>{customer.address}</td>
                                 <td>{customer.salary}</td>
                                 <td>
-                                    <button className="btn btn-outline-danger btn-sm " onClick={(e)=>{
+                                    <button className="btn btn-outline-danger btn-sm " onClick={()=>{
                                     if(confirm('do you want delete')) {
                                         deleteCustomer(customer._id)
                                     }
                                     }}> Delete</button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-outline-success btn-sm "> Update</button>
+                                    <button className="btn btn-outline-success btn-sm "
+                                    onClick={()=>{
+                                        lunchModel(customer._id)
+                                    }}> Update</button>
                                 </td>
                             </tr>
                         })}
@@ -139,6 +173,53 @@ function Customer() {
             </div>
 
 
+
+        {/*    model------------------------------------*/}
+            <Modal show={modeState}>
+
+                <div className="container">
+                    <div className="row">
+                        <div className={"p-3"}>
+                            <h1>Customer Update</h1>
+                        </div>
+
+                        <div className="col-12">
+                            <UpdateInput type={"text"} name={"updateNic"} defaultValue={updateNic} callBack={setUpdateNic}/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div className="col-12">
+                            <UpdateInput type={"text"} name={"updateName"} defaultValue={updateName} callBack={setUpdateName}/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div className="col-12">
+                            <UpdateInput type={"text"} name={"updateAddress"} defaultValue={updateAddress} callBack={setUpdateAddress}/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div className="col-12">
+                            <UpdateInput type={"number"}
+                                         name={"updateSalary"}
+                                         defaultValue={updateSalary}
+                                         callBack={setUpdateSalary}/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div className="col-12 mb-3">
+                            <button className={"btn btn-success  col-12"} onClick={updateCustomer}>Update</button>
+                            <br/>
+                            <br/>
+                            <button className={"btn btn-danger  col-12"} onClick={()=>{
+                                setModelState(false)
+                            }}>Close</button>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+
+            </Modal>
+        {/*    model------------------------------------*/}
         </div>
     )
 }
