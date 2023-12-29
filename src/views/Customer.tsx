@@ -1,5 +1,7 @@
 import Input from "../components/input/Input.tsx";
 import {useState} from "react";
+import axios from "axios";
+
 
 interface Customer {
     _id:string,
@@ -17,8 +19,12 @@ function Customer() {
     const [salary, setSalary] = useState<number | "">('')
 
 
-    const saveCustomer=()=>{
+    const saveCustomer= async ()=>{
         console.log(nic,name,address,salary)
+     const response= await  axios.post('http://localhost:3000/api/v1/customers/create',{
+            nic,name,address,salary
+        })
+        console.log(response)
     }
 
     return (
