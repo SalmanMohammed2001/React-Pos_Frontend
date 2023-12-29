@@ -35,7 +35,14 @@ function Customer() {
         const response=await axios.get('http://localhost:3000/api/v1/customers/find-all?searchText=&page=1&size=10')
         setCustomers(response.data)
     }
-    console.log(customers)
+
+    const deleteCustomer=async (id:string)=>{
+        const response=await axios.delete('http://localhost:3000/api/v1/customers/delete-by-id',{params:{id}})
+        console.log(response)
+        findAllCustomer()
+    }
+
+
     return (
         <div className="container pt-3">
                 <div className="row">
@@ -114,7 +121,11 @@ function Customer() {
                                 <td>{customer.address}</td>
                                 <td>{customer.salary}</td>
                                 <td>
-                                    <button className="btn btn-outline-danger btn-sm "> Delete</button>
+                                    <button className="btn btn-outline-danger btn-sm " onClick={(e)=>{
+                                    if(confirm('do you want delete')) {
+                                        deleteCustomer(customer._id)
+                                    }
+                                    }}> Delete</button>
                                 </td>
                                 <td>
                                     <button className="btn btn-outline-success btn-sm "> Update</button>
